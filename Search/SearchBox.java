@@ -1,5 +1,6 @@
+package Search;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -151,7 +152,7 @@ public class SearchBox implements ActionListener{
         //String lt;
         //String rb;
 
-        String file = "/Users/Phoenix/Documents/LibFinder/LibStructure.inp";
+        String file = "Search/LibStructure.inp";
 
         try {
             fr = new FileReader(file);
