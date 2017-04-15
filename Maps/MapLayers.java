@@ -13,23 +13,23 @@ import java.awt.Graphics2D;
 
 
 public class MapLayers implements ActionListener{
-	/* The name of book. */
+	/** The name of book. */
 	String bookName;
-	/* The call number. */
+	/** The call number. */
 	String callNum;
 	
-	/* The list of FLOOR Objects. */
+	/** The list of FLOOR Objects. */
 	List<Floor> flrL;
-	/* The index for floor it the book is on. */
+	/** The index for floor it the book is on. */
 	int flr; 
-	/* Width of each floor on the screen. */
+	/** Width of each floor on the screen. */
 	int flr_w = 30;
-	/* Length of each floor on the screen. */
+	/** Length of each floor on the screen. */
 	int flr_l = 10;
-	/* Gap between floors. */
+	/** Gap between floors. */
 	int flr_g = 50;
 	
-	/* LinkedList of floor button. */
+	/** LinkedList of floor button. */
 	LinkedList<Rectangles> flrBt;
 	
 	

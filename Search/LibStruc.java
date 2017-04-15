@@ -1,6 +1,5 @@
 package Search;
 
-import Maps.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class LibStruc{
 
 
 
-    static public BookInfo libStruc(String callno, String fileName) {
+    static public BookInfo libStruc(String callno, String bookName, String libStructFile) {
 
         BufferedReader br;
         FileReader fr;
@@ -30,10 +29,9 @@ public class LibStruc{
         Pattern shelf_p = Pattern.compile("shelf ([0-9]+).*?([0-9]+).*?");
 
 
-        String file = fileName;
 
         try {
-            fr = new FileReader(file);
+            fr = new FileReader(libStructFile);
             br = new BufferedReader(fr);
 
             String curfloor = null;
@@ -51,14 +49,16 @@ public class LibStruc{
             int colno = 0;
             int columns = 1;
 
-            String lt = "";
-            String rb = "";
+            int x_tl = 0;
+            int y_tl = 0;
+            int sec_width = 0;
+            int sec_length = 0;
 
             String libName = br.readLine();
 
-            List<Floor> floorList = new LinkedList<>();
+            List<String> floorList = new LinkedList<>();
             for (String flr_name : br.readLine().split("\\s+")){
-                floorList.add(new Floor(flr_name));
+                floorList.add(flr_name);
             }
 
 
@@ -118,8 +118,10 @@ public class LibStruc{
                     //System.out.println("Storing Information about section" + callsec);
                     floorS = curfloor;
                     String[] secinfo = currLine.split("\\s+");
-                    lt = secinfo[2];
-                    rb = secinfo[3];
+                    x_tl = Integer.parseInt(secinfo[2]);
+                    y_tl = Integer.parseInt(secinfo[3]);
+                    sec_width = Integer.parseInt(secinfo[4]);
+                    sec_length = Integer.parseInt(secinfo[5]);
                     secfound = true;
                 } else {
                     System.out.println("Catch an unreadable line");
@@ -129,8 +131,8 @@ public class LibStruc{
             }
 
             System.out.println("Summary");
-            System.out.println(lt);
-            System.out.println(rb);
+            System.out.println(x_tl);
+            System.out.println(y_tl);
             System.out.println("Floor: " + floorS + " with floor number " + floorno);
             System.out.println("Shelf " + shelfno + " out of " + shelves + " shelves.");
             System.out.println("Column " + colno + " out of " + columns + " columns.");
@@ -138,12 +140,14 @@ public class LibStruc{
             fr.close();
 
 
-            return new BookInfo(callno, findBook(callno, path), floorList, shelves, shelno, columns, colno, lt, rb)
+            return new BookInfo(libName, callno, bookName,
+                    floorList, floorno, shelves, shelfno, columns, colno, x_tl, y_tl, sec_width, sec_length);
 
 
         } catch (IOException e) {
 
         }
+        return null;
     }
 
     static String[] splitCallNum(String callNum) {
@@ -157,44 +161,13 @@ public class LibStruc{
         return new String[] {matcher.group(1), matcher.group(2), matcher.group(3)};
     }
 
-    public class BookInfo {
-        String callno;
-        String title;
-        /* List of all the possible floors in the building. */
-        List<String> floors;
-        String floor;
-        int shelfno;
-        int shelf;
-        int colno;
-        int col;
-        int lt;
-        int rb;
-        int length;
-        int width;
 
-        BookInfo(String callnum, String bookname, List<String> flrs, String fl, int shno, int sh, int cno, int c, String t, String b, String len, String wid) {
-            callno = callnum;
-            title = bookname;
-            floors = flrs;
-            floor = fl;
-            shelfno = shno;
-            shelf = sh;
-            colno = cno;
-            col = c;
-            lt = Integer.parseInt(t);
-            rb = Integer.parseInt(b);
-            length = Integer.parseInt(len);
-            width = Integer.parseInt(wid);
-        }
-
-
-    }
 
     public static void main(String[] args) {
         //SearchBox startSearch =
         //new SearchBox();
 
-        libStruc("A28.H4", "Search/LibStructure.inp");
+        libStruc("A28.H4", "Blablablab", "Search/LibStructure.inp");
 
     }
 }
