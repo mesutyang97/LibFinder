@@ -26,5 +26,4 @@ public class LibStrucTest {
         assertTrue("H12".equals(r1[2]));
     }
 
-
 }
