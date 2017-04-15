@@ -1,4 +1,4 @@
-package Search;
+package Maps;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -6,20 +6,27 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static Maps.MapsException.*;
+
 public class SearchBox implements ActionListener{
 
 
     JLabel bookName;
-
     JLabel callNo;
-
 
     JTextField enterBook;
     JTextField enterCall;
     JButton search;
 
+    String blistPath;
 
-    public SearchBox() {
+    String bookS;
+    String callNumS;
+
+
+
+    public SearchBox(String booklist) {
+        blistPath = booklist;
 
         JFrame frame = new JFrame();
         frame.setTitle("LibFinder");
@@ -71,26 +78,33 @@ public class SearchBox implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent evt) {
 
-
-
         /* Current text in book title text box. */
         String inpTitle = enterBook.getText();
         /* Current text in Call no. text box. */
         String inpCall = enterCall.getText();
-        String callno;
+
+
+
 
         if (!inpTitle.equals("e.g. The Perks of Being a WallFlower") && !inpTitle.equals("")) {
             /* EXECUTE FUNCTION TO FIND CALL NO */
-            callno = findCall(inpTitle);
-            if (callno == null) {
+            String callNumTemp = findCall(inpTitle);
+            if (callNumTemp == null) {
                 Error();
+            } else {
+                callNumS = callNumTemp;
+                bookS = inpTitle;
             }
-
         }
 
         else if (!inpCall.equals("") && !inpCall.equals("e.g. Q143.H6 .A37 1980")) {
-            callno = enterCall.getText();
-
+            String bookNameTemp = findBook(inpCall);
+            if (bookNameTemp == null) {
+                Error();
+            } else {
+                callNumS = inpCall;
+                bookS = bookNameTemp;
+            }
         }
 
         else {
@@ -114,7 +128,7 @@ public class SearchBox implements ActionListener{
         FileReader fr;
         String currLine;
 
-        String file = "/Users/Phoenix/Documents/LibFinder/BookList.inp";
+        String file = blistPath;
 
         try {
             fr = new FileReader(file);
@@ -132,10 +146,42 @@ public class SearchBox implements ActionListener{
 
 
         } catch (IOException e) {
-
+            throw error("File " + file + " is not properly placed.");
         }
 
         return callno;
+
+    }
+
+
+    protected static String findBook(String callNum) {
+        String bookName = null;
+        BufferedReader br;
+        FileReader fr;
+        String currLine;
+
+        String file = "/Users/Phoenix/Documents/LibFinder/BookList.inp";
+
+        try {
+            fr = new FileReader(file);
+            br = new BufferedReader(fr);
+
+            while ((currLine = br.readLine()) != null) {
+                String currcall = br.readLine();
+                if (currcall.equals(callNum)) {
+                    bookName = currLine;
+                }
+            }
+
+            br.close();
+            fr.close();
+
+
+        } catch (IOException e) {
+            throw error("File %s is not properly placed.", file);
+        }
+
+        return bookName;
 
     }
 
@@ -226,15 +272,6 @@ public class SearchBox implements ActionListener{
         } catch (IOException e) {
 
         }
-
-    }
-
-
-    public static void main(String[] args) {
-        //SearchBox startSearch =
-        //new SearchBox();
-
-        libStruc("hi");
 
     }
 
