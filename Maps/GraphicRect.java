@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GraphicRect extends JPanel {
-    private static final String PATH = "/Users/Phoenix/Downloads/stacks_c-1 copy.png";
+    private static final String PATH = "";
     private static final Color SHAPE_COLOR = new Color(100, 150, 255);
     private static final Stroke STROKE = new BasicStroke(10f);
 
@@ -83,8 +83,8 @@ public class GraphicRect extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
                /* FIX FIX FIX */
-        JLabel book = new JLabel("The scientist:");
-        JLabel call = new JLabel("Q 143 .C23 1991");
+        JLabel book = new JLabel(bookinfo.title);
+        JLabel call = new JLabel(bookinfo.callno);
         panel.add(book);
         panel.add(call);
         JButton button = new JButton("Prev");
@@ -100,8 +100,122 @@ public class GraphicRect extends JPanel {
         frame.setVisible(true);
     }
 
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+
+        Object control = evt.getSource();
+        if (control == building) {
+            if (evt.getActionCommand().equals("Next")) {
+                floorView();
+            }
+
+        }
+        else if (control == floor) {
+            if (evt.getActionCommand().equals("Next")) {
+                shelvesView();
+            }
+            else if (evt.getActionCommand().equals("Prev")) {
+                buildingView();
+            }
+        }
+
+        else if (control == shelves) {
+            if (evt.getActionCommand().equals("Next")) {
+                shelfView();
+            }
+            else if (evt.getActionCommand().equals("Prev")) {
+                floorView();
+            }
+        }
+
+        else if (control == shelf) {
+            if (evt.getActionCommand().equals("Next")) {
+                colView();
+            }
+
+            else if (evt.getActionCommand().equals("Prev")) {
+                shelvesView();
+            }
+        }
+
+        else if (control == col) {
+
+            else if (evt.getActionCommand().equals("Prev")) {
+                shelfView();
+            }
+        }
+
+
+        }
+
+    }
+
+    public void buildingView() {
+        List<String> floors = bookinfo.floors;
+        String floor = bookinfo.floor;
+        shapes = new ArrayList<>();
+        double start = ;
+        double end = ;
+        shapes = new ArrayList<>();
+        shapes.add
+
+
+    }
+
+
+    public void floorView() {
+
+        lt = bookinfo.lt;
+        rb = bookinfo.rb;
+        len = bookinfo.length;
+        wid = bookinfo.width;
+
+        double rect_x = lt;
+        double rect_y;
+        double rect_h = len;
+        double rect_w = wid;
+        shapes = new ArrayList<>();
+        shapes.add(new Rectangle2D.Double(rect_x, rect_y, rect_w, rect_h));
+
+    }
+
+
+    public void shelvesView() {
+
+        shelfno = bookinfo.shelfno;
+        shelf = bookinfo.shelf;
+
+        double rect_x = lt;
+        double rect_y;
+        double rect_h = ;
+        double rect_w = ;
+
+        double start = ;
+        double gap = ;
+
+        shapes = new ArrayList<>();
+        for (int i = 0, pos = start; rect > i; i += 1, pos += gap) {
+            shapes.add(new Rectangle2D.Double(rect_x + pos, rect_y, rect_w, rect_h));
+        }
+
+    }
+
+    public void shelfView() {
+
+    }
+
+    public void colView() {
+
+    }
+
+
+
     public static void main(String[] args) {
-        createAndShowGui();
+
+        BookInfo bookinfo = new BookInfo();
+        createAndShowGui("/Users/Phoenix/Downloads/stacks_c-1 copy.png", bookinfo);
+        PATH = "/Users/Phoenix/Downloads/stacks_c-1 copy.png";
        /*
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
