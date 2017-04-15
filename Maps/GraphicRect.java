@@ -7,29 +7,24 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.Stroke;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import Search.BookInfo;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
 public class GraphicRect extends JPanel {
-    private static final String PATH = "";
     private static final Color SHAPE_COLOR = new Color(100, 150, 255);
     private static final Stroke STROKE = new BasicStroke(10f);
 
-    static String stacksimgPath = "/Users/Phoenix/Downloads/stacks_c-1crop.png";
-    static String whiteimgPath = "/Users/Phoenix/Downloads/White_square.png";
+    static String stacksimgPath = "images/stacks_c-1crop.png";
+    static String whiteimgPath = "images/White_square.png";
 
     static private BufferedImage img;
     static private List<Shape> shapes = new ArrayList<>();
@@ -82,19 +77,7 @@ public class GraphicRect extends JPanel {
 
 
 
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-               /* FIX FIX FIX */
-        JLabel book = new JLabel(bookinfo.getTitle());
-        JLabel call = new JLabel(bookinfo.getCallno());
-        panel.add(book);
-        panel.add(call);
-        JButton button = new JButton("Prev");
-        panel.add(button);
-        JButton button2 = new JButton("Next");
-        panel.add(button2);
-
+        //JFrame floorf = new JFrame("Floor");
 
 
 
@@ -103,9 +86,9 @@ public class GraphicRect extends JPanel {
         buildingf.getContentPane().add(new GraphicRect(whiteimg), BorderLayout.CENTER);
 
 
-        floorf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        floorf.getContentPane().setLayout(new BorderLayout());
-        floorf.getContentPane().add(new GraphicRect(stacksimg), BorderLayout.CENTER);
+        //floorf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //floorf.getContentPane().setLayout(new BorderLayout());
+        //floorf.getContentPane().add(new GraphicRect(stacksimg), BorderLayout.CENTER);
 
 
         JPanel buildingp = new JPanel();
@@ -121,15 +104,12 @@ public class GraphicRect extends JPanel {
         buildingf.setVisible(true);
 
 
-        floorf.add(floorp, BorderLayout.SOUTH);
-        floorf.pack();
-        floorf.setLocationRelativeTo(null);
-        floorf.setVisible(false);
+        //floorf.add(floorp, BorderLayout.SOUTH);
+        //floorf.pack();
+        //floorf.setLocationRelativeTo(null);
+        //floorf.setVisible(false);
 
-        buildingView();
-
-
-
+        buildingView(bookinfo);
 
         /*
 
@@ -146,8 +126,8 @@ public class GraphicRect extends JPanel {
         */
 
 
-        JLabel book = new JLabel(bookinfo.title);
-        JLabel call = new JLabel(bookinfo.callno);
+        JLabel book = new JLabel(bookinfo.getTitle());
+        JLabel call = new JLabel(bookinfo.getCallno());
         buildingp.add(book);
         buildingp.add(call);
 
@@ -163,7 +143,7 @@ public class GraphicRect extends JPanel {
             public void actionPerformed(ActionEvent e){
                 buildingp.setVisible(false);
                 floorp.setVisible(true);
-                floorView();
+                floorView(bookinfo);
 
             }
         });
@@ -198,9 +178,9 @@ public class GraphicRect extends JPanel {
 
 
 
-    public static void buildingView() {
-        List<String> floors = bookinfo.floors;
-        String floor = bookinfo.floor;
+    public static void buildingView(BookInfo bookinfo) {
+        List<String> floors = bookinfo.getFloors();
+        String floor = bookinfo.getFloors().get(bookinfo.getParams()[0]);
         shapes = new ArrayList<>();
         double rect_x = 50;
         double rect_y = 50;
@@ -213,12 +193,14 @@ public class GraphicRect extends JPanel {
     }
 
 
-    public static void floorView() {
+    public static void floorView(BookInfo bookinfo) {
 
+        /*
         lt = bookinfo.lt;
         rb = bookinfo.rb;
         len = bookinfo.length;
         wid = bookinfo.width;
+        */
 
         double rect_x = 50;
         double rect_y = 50;
@@ -232,8 +214,10 @@ public class GraphicRect extends JPanel {
 
     public static void shelvesView() {
 
+        /*
         shelfno = bookinfo.shelfno;
         shelf = bookinfo.shelf;
+        */
 
         double rect_x = 50;
         double rect_y = 50;
@@ -246,7 +230,7 @@ public class GraphicRect extends JPanel {
         shapes = new ArrayList<>();
         //rect = shelfno;
         double rect = 3;
-        for (int i = 0, pos = start; rect > i; i += 1, pos += gap) {
+        for (double i = 0, pos = start; rect > i; i += 1, pos += gap) {
             shapes.add(new Rectangle2D.Double(rect_x + pos, rect_y, rect_w, rect_h));
         }
 
@@ -276,7 +260,7 @@ public class GraphicRect extends JPanel {
 
     public static void main(String[] args) {
 
-        BookInfo bookinfo = new BookInfo("callno", "book", new ArrayList<String>(), 0, 0, 0, 0, 0, 0);
+        BookInfo bookinfo = new BookInfo("Main Stacks","callno", "book", new ArrayList<String>(), 0, 0, 0, 0, 0, 0, 0, 0, 0);
         //stacksimgPath = "/Users/Phoenix/Downloads/stacks_c-1crop.png";
         //whiteimgPath = "/Users/Phoenix/Downloads/White_square.png";
         createAndShowGui(bookinfo);

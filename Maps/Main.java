@@ -1,12 +1,9 @@
 package Maps;
 
-import Search.BookInfo;
 import Search.LibStruc;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 
 import static Maps.MapsException.*;
 
@@ -52,7 +49,7 @@ public class Main {
     private void process() {
         SearchBox sb = new SearchBox(_callNumDir);
         BookInfo bookI = LibStruc.libStruc(sb.callNumS, sb.bookS, _libStrucDir);
-        GraphicRect.createAndShouGui(bookI);
+        GraphicRect.createAndShowGui();
     }
 
     /** The path to file that stores the library structure. */
@@ -60,6 +57,8 @@ public class Main {
 
     /** The path to file that stores the book-call number relation. */
     private String _callNumDir;
+
+
 
 
 
