@@ -1,3 +1,5 @@
+package Maps;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,6 +18,7 @@ import java.io.File;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import Search.BookInfo;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -78,7 +81,20 @@ public class GraphicRect extends JPanel {
         JFrame buildingf = new JFrame("Building");
 
 
-        JFrame floorf = new JFrame("Floor");
+
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+               /* FIX FIX FIX */
+        JLabel book = new JLabel(bookinfo.getTitle());
+        JLabel call = new JLabel(bookinfo.getCallno());
+        panel.add(book);
+        panel.add(call);
+        JButton button = new JButton("Prev");
+        panel.add(button);
+        JButton button2 = new JButton("Next");
+        panel.add(button2);
+
 
 
 
