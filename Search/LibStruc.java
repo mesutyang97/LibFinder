@@ -14,7 +14,7 @@ public class LibStruc{
 
 
 
-    static public void libStruc(String callno, String fileName) {
+    static public BookInfo libStruc(String callno, String fileName) {
 
         BufferedReader br;
         FileReader fr;
@@ -138,6 +138,9 @@ public class LibStruc{
             fr.close();
 
 
+            return new BookInfo(callno, findBook(callno, path), floorList, shelves, shelno, columns, colno, lt, rb)
+
+
         } catch (IOException e) {
 
         }
@@ -152,6 +155,39 @@ public class LibStruc{
         System.out.println(matcher.group(2));
         System.out.println(matcher.group(3));
         return new String[] {matcher.group(1), matcher.group(2), matcher.group(3)};
+    }
+
+    public class BookInfo {
+        String callno;
+        String title;
+        /* List of all the possible floors in the building. */
+        List<String> floors;
+        String floor;
+        int shelfno;
+        int shelf;
+        int colno;
+        int col;
+        int lt;
+        int rb;
+        int length;
+        int width;
+
+        BookInfo(String callnum, String bookname, List<String> flrs, String fl, int shno, int sh, int cno, int c, String t, String b, String len, String wid) {
+            callno = callnum;
+            title = bookname;
+            floors = flrs;
+            floor = fl;
+            shelfno = shno;
+            shelf = sh;
+            colno = cno;
+            col = c;
+            lt = Integer.parseInt(t);
+            rb = Integer.parseInt(b);
+            length = Integer.parseInt(len);
+            width = Integer.parseInt(wid);
+        }
+
+
     }
 
     public static void main(String[] args) {
