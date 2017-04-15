@@ -1,0 +1,68 @@
+floor B
+sec A   20  50
+shelf 1 20
+col 2
+col 15
+shelf 21 30
+col 26
+col 29
+shelf   31  43
+col 32
+col 43
+sec AB  20  50
+shelf 1 20
+col 32
+col 43
+sec BM  30  60
+shelf 1 20
+col 32
+shelf 1 20
+col 43
+sec CT 30  60
+shelf 1 20
+col 32
+col 43
+sec D 30  60
+shelf 1 20
+col 32
+col 43
+sec DC 30  60
+shelf 1 20
+col 32
+col 43
+floor C
+sec DK 70  100
+shelf 1 20
+col 72
+col 63
+sec G   70  100
+shelf 1 20
+col 72
+col 63
+sec HC  70  100
+shelf 1 20
+col 72
+shelf 1 20
+col 63
+sec HQ  70  100
+shelf 1 20
+col 72
+col 63
+floor D
+sec JZ  70  100
+shelf 1 20
+col 72
+col 63
+sec NK  70  100
+shelf 1 20
+col 72
+col 63
+sec PG  70  100
+shelf 1 20
+col 72
+col 63
+sec PG  70  100
+shelf 1 20
+col 72
+col 63
+

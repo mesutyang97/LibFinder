@@ -66,12 +66,6 @@ public class SearchBox implements ActionListener{
     }
 
 
-    public static void main(String[] args) {
-        //SearchBox startSearch =
-        new SearchBox();
-
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -144,5 +138,102 @@ public class SearchBox implements ActionListener{
     }
 
 
+    static private void libStruc(String callno) {
+
+        BufferedReader br;
+        FileReader fr;
+        String currLine;
+
+        String callsec = "A";
+        String callshelf = "32";
+        String callrow = "";
+
+        //String lt;
+        //String rb;
+
+        String file = "/Users/Phoenix/Documents/LibFinder/LibStructure.inp";
+
+        try {
+            fr = new FileReader(file);
+            br = new BufferedReader(fr);
+
+            String floor = null;
+            boolean secfound = false;
+            boolean shelffound = false;
+
+            int shelfno = 0;
+            int shelves = 0;
+
+            int colno = 0;
+            int columns = 0;
+
+            String lt = "";
+            String rb = "";
+
+
+            while ((currLine = br.readLine()) != null) {
+                if (shelffound) {
+
+                    boolean colfound = false;
+
+                    while ((currLine = br.readLine()).substring(0, 2).equals("col")) {
+                        String[] colinfo = currLine.split("\\s+");
+                        if (colinfo[1].equals(callshelf)) {
+                            colfound = true;
+                        } else if (!colfound) {
+                            colno += 1;
+                        }
+                        columns += 1;
+                    }
+
+                    while (!((currLine = br.readLine()).substring(0, 2).equals("sec"))) {
+                        if (currLine.substring(0,4).equals("shelf")) {
+                            shelves += 1;
+                        }
+                    }
+                    return;
+                } else if (secfound) {
+                    shelfno += 1;
+                    shelves += 1;
+                    String[] shelfinfo = currLine.split("\\s+");
+                    if (callshelf.compareTo(shelfinfo[2]) <= 0) {
+                        shelffound = true;
+                    }
+                } else if (currLine.substring(0, 4).equals("floor")) {
+                    floor = Character.toString(currLine.charAt(6));
+
+                } else if (currLine.substring(0, 4).equals("sec " + callsec)) {
+                    String[] secinfo = currLine.split("\\s+");
+                    lt = secinfo[2];
+                    rb = secinfo[3];
+                    secfound = true;
+                }
+
+            }
+
+            System.out.println(lt);
+            System.out.println(rb);
+            System.out.println(shelves);
+            System.out.println(shelfno);
+            System.out.println(colno);
+            System.out.println(columns);
+            br.close();
+            fr.close();
+
+
+        } catch (IOException e) {
+
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        //SearchBox startSearch =
+        //new SearchBox();
+
+        libStruc("hi");
+
+    }
 
 }
