@@ -110,8 +110,11 @@ public class MapLayers implements ActionListener{
 		
 		/* Floor Printout. */
 		
-		totalPanel.add(new Rectangles(fL, f),BorderLayout.CENTER);
-
+		
+		Rectangles rect = new Rectangles(fL, f);
+		
+		totalPanel.add(rect);
+		
 		
 		//Get Customer Name
 		JPanel GetCustNamePanel = new JPanel();
@@ -137,12 +140,13 @@ public class MapLayers implements ActionListener{
 		buttonPanel.add(clickmeButton);
 		totalPanel.add(buttonPanel,BorderLayout.SOUTH);
 		
-		totalFrame.setSize(600, 400);;
+		totalFrame.setSize(600, 600);;
 		totalFrame.setVisible(true);
 		
 		
 		
 	}
+	
 	
 	
 	
@@ -157,6 +161,7 @@ public class MapLayers implements ActionListener{
 		}
 		
 		public void paintComponent(Graphics g) {
+			System.out.print("sss");
 		    super.paintComponent(g);
 		    
 		    Graphics2D g2d = (Graphics2D) g;
