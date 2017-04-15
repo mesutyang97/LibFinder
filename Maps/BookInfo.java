@@ -1,4 +1,4 @@
-package Search;
+package Maps;
 
 import java.util.List;
 
