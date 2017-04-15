@@ -1,18 +1,23 @@
+Main Stacks
+B C D
 floor B
 sec A   20  50
 shelf 1 20
 col 2
 col 15
+col 20
 shelf 21 30
 col 26
-col 29
-shelf   31  43
+col 28
+col 20
+shelf 31 43
 col 32
 col 43
 sec AB  20  50
 shelf 1 20
-col 32
-col 43
+col 4
+col 14
+col 20
 sec BM  30  60
 shelf 1 20
 col 32
