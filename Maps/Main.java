@@ -49,7 +49,7 @@ public class Main {
     private void process() {
         SearchBox sb = new SearchBox(_callNumDir);
         BookInfo bookI = LibStruc.libStruc(sb.callNumS, sb.bookS, _libStrucDir);
-        GraphicRect.createAndShowGui();
+        GraphicRect.createAndShowGui(bookI);
     }
 
     /** The path to file that stores the library structure. */

@@ -1,3 +1,5 @@
+package Maps;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,19 +26,18 @@ import javax.swing.*;
 public class GraphicSections extends JPanel {
 
 
-    class GraphicSections extends JPanel {
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.setColor(Color.red);
-            g.drawRect(100, 10, 30, 40);
-        }
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.red);
+        g.drawRect(100, 10, 30, 40);
+    }
 
-        @Override
-        public Dimension getPreferredSize() {
+    @Override
+    public Dimension getPreferredSize() {
             return new Dimension(400,400); // As suggested by camickr
         }
-    }
+
 
     private static void createAndShowGui() {
         GraphicSections mp = new GraphicSections();
