@@ -83,8 +83,9 @@ public class GraphicRect extends JPanel {
 
         buildingf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         buildingf.getContentPane().setLayout(new BorderLayout());
+        System.out.println("sfs");
         buildingf.getContentPane().add(new GraphicRect(whiteimg), BorderLayout.CENTER);
-
+        System.out.println("fsf");
 
         //floorf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //floorf.getContentPane().setLayout(new BorderLayout());

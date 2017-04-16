@@ -21,7 +21,7 @@ public class BookInfo {
     private int length;
     private int width;
 
-    BookInfo(String lib, String callnum, String bookname, List<String> flrs, int fl,
+    public BookInfo(String lib, String callnum, String bookname, List<String> flrs, int fl,
              int shno, int sh, int cno, int c, int x, int y, int len, int wid) {
         libName = lib;
         callno = callnum;
